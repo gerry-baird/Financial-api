@@ -1,0 +1,79 @@
+swagger: '2.0'
+info:
+  description: Budget API
+  version: "2.1"
+  title: Budget Lookup API
+host: "159.122.186.245:31762"
+schemes:
+- "http"
+paths:
+  /api/budget/{ccId}:
+    get:
+      produces:
+        - application/json
+      operationId: "getBudgetById"
+      parameters:
+      - name: "ccId"
+        in: "path"
+        description: "Cost Code CC of budget to return"
+        required: true
+        type: "integer"
+        format: "int32"
+      responses:
+        '200':
+          description: Definition generated from Swagger Inspector
+          schema:
+            $ref: '#/definitions/Budget'
+        '404':
+          description: Definition generated from Swagger Inspector
+          schema:
+            type: string
+    put:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      operationId: "updateBudgetById"
+      parameters:
+        - name: "ccId"
+          in: "path"
+          description: "Cost Code CC of budget to return"
+          required: true
+          type: "integer"
+          format: "int32"
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/Budget'
+      responses:
+        '200':
+          description: Definition generated from Swagger Inspector
+          schema:
+            $ref: '#/definitions/Budget'
+        '404':
+          description: Definition generated from Swagger Inspector
+          schema:
+            type: string
+definitions:
+  Budget:
+    properties:
+      cc:
+        type: integer
+        format: int32
+      allocated:
+        type: integer
+        format: int32
+      requisitioned:
+        type: integer
+        format: int32
+      delivered:
+        type: integer
+        format: int32
+      invoiced:
+        type: integer
+        format: int32
+      holderName:
+        type: string
+      holderEmail:
+        type: string

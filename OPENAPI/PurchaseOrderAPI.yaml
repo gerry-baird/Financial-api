@@ -1,0 +1,109 @@
+swagger: '2.0'
+info:
+  description: Purchase Order API
+  version: "2.1"
+  title: Purchase Order API
+host: "159.122.186.245:31762"
+schemes:
+- "http"
+paths:
+  /api/purchaseOrders/{po}:
+    get:
+      produces:
+        - application/json
+      operationId: "getPurchaseOrderById"
+      parameters:
+      - name: "po"
+        in: "path"
+        description: "PO ref of Purchase Order to return"
+        required: true
+        type: "string"
+      responses:
+        '200':
+          description: Definition generated from Swagger Inspector
+          schema:
+            $ref: '#/definitions/PurchaseOrderExisting'
+        '404':
+          description: Definition generated from Swagger Inspector
+          schema:
+            type: string
+  /api/purchaseOrders/:
+    post:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      operationId: "createPurchaseOrder"
+      parameters:
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/PurchaseOrderNew'
+      responses:
+        '200':
+          description: Definition generated from Swagger Inspector
+          schema:
+            $ref: '#/definitions/PurchaseOrderExisting'
+
+definitions:
+  PurchaseOrderExisting:
+    properties:
+      poNumber:
+        type: string
+      cc:
+        type: integer
+        format: int32
+      cost:
+        type: integer
+        format: int32
+      description:
+        type: string
+      vendor:
+        type: string
+      creatorName:
+        type: string
+      creatorEmail:
+        type: string
+      partsList:
+        type: array
+        items:
+          $ref: '#/definitions/PartsList'
+  PurchaseOrderNew:
+    properties:
+      cc:
+        type: integer
+        format: int32
+      cost:
+        type: integer
+        format: int32
+      description:
+        type: string
+      vendor:
+        type: string
+      creatorName:
+        type: string
+      creatorEmail:
+        type: string
+      partsList:
+        type: array
+        items:
+          $ref: '#/definitions/PartsList'
+  PartsList:
+    properties:
+      _id:
+        type: string
+      partNumber:
+        type: string
+      description:
+        type: string
+      qty:
+        type: integer
+        format: int32
+      vendor:
+        type: string
+      uom:
+        type: string
+      unitCost:
+        type: number
+        format: double
