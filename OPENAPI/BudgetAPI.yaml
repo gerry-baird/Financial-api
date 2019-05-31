@@ -3,7 +3,7 @@ info:
   description: Budget API
   version: "2.1"
   title: Budget Lookup API
-host: "159.122.186.245:31762"
+host: "159.8.181.195:32224"
 schemes:
 - "http"
 paths:
@@ -41,6 +41,28 @@ paths:
           required: true
           type: "integer"
           format: "int32"
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/Budget'
+      responses:
+        '200':
+          description: Definition generated from Swagger Inspector
+          schema:
+            $ref: '#/definitions/Budget'
+        '404':
+          description: Definition generated from Swagger Inspector
+          schema:
+            type: string
+  /api/budget/:
+    post:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      operationId: "createBudget"
+      parameters:
         - in: body
           name: body
           required: false
