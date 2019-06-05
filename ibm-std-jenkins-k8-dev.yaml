@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: budget-api
 spec:
-  replicas: 2
+  replicas: 3
   template:
     metadata:
       labels:
