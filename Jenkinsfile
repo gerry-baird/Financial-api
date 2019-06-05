@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment {
+        DOCKER_IMAGE_NAME="gerrybaird/financial-api"
+    }
     stages {
         stage('Build') {
             steps {
@@ -14,7 +17,7 @@ pipeline {
             }
             steps {
                 script {
-                    app = docker.build("gerrybaird/financial-api")
+                    app = docker.build(DOCKER_IMAGE_NAME)
                     app.inside {
                         sh 'echo $(curl localhost:8080)'
                     }
