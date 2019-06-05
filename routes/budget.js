@@ -101,7 +101,7 @@ router.get('/:cc', async(req, res) => {
   winston.debug(budget);
   if (_.isEmpty(budget)) {
     winston.error('Budget could not be found : ' + cc);
-    return res.status(404).send('The budget with the given cost center was not found.');
+    return res.status(404).send('That budget doesnt exist.');
   }
  
   res.send(budget);
