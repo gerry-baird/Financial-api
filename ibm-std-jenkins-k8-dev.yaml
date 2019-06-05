@@ -1,0 +1,33 @@
+apiVersion: extensions/v1beta1 # for versions before 1.6.0 use extensions/v1beta1
+kind: Deployment
+metadata:
+  name: budget-api
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        run: budget-api
+    spec:
+      containers:
+      - name: budget-api
+        image: $DOCKER_IMAGE_NAME:$BUILD_NUMBER
+        ports:
+        - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: budget-api-loadbalancer-svc
+  annotations:
+    service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type: public
+    service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan: "2607311"
+  labels:
+    run: budget-api
+spec:
+  selector:
+    run: budget-api
+  type: LoadBalancer
+  ports:
+   - protocol: TCP
+     port: 3000
